@@ -7,13 +7,14 @@ build-shared-lib:
 	go tool cgo -exportheader lua/pdf.h pdf.go
 
 build-lua-image:
-	cd lua && docker build -t ebcom/luago .
+	cd lua && docker build -t imba28/lua-go-pdf .
 
 run:
-	docker run --name=lua ebcom/luago && docker cp lua:/app/invoice.pdf . && docker rm lua
+	docker run --name=lua-go-pdf imba28/lua-go-pdf && docker cp lua-go-pdf:/app/invoice.pdf . && docker rm lua-go-pdf
 
 clean:
 	rm -rf _obj
-	docker rm lua
+	docker rm lua-go-pdf
 
-
+build-dll:
+	go build -buildmode=c-archive pdf.go
