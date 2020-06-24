@@ -70,8 +70,11 @@ func fullScreenshot(url string, res *[]byte) chromedp.Tasks {
 		chromedp.WaitReady("body"),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			buf, _, err := page.PrintToPDF().Do(ctx)
+			if err != nil {
+				return err
+			}
 			*res = buf
-			return err
+			return nil
 		}),
 	}
 }
