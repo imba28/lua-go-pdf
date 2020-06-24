@@ -1,6 +1,6 @@
 local ffi = require("ffi")
 local pdf = ffi.load('./pdf.so')
-local io = require "io"
+local io = require("io")
 
 ffi.cdef([[
 typedef long long GoInt64;
@@ -26,7 +26,7 @@ local templateGoString = typeString(templateName, #templateName)
 local result = pdf.render(templateGoString)
 local content = ffi.string(result.r0, result.r1)
 
-file = io.open("invoice.pdf", "w")
+local file = io.open("invoice.pdf", "w")
 io.output(file)
 io.write(content)
 io.close(file)
