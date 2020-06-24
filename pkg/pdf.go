@@ -1,5 +1,8 @@
 package main
 
+/*
+#include <stdlib.h>
+*/
 import "C"
 import (
 	"context"
@@ -24,9 +27,14 @@ func render(templatePath string) (unsafe.Pointer, C.size_t) {
 	}
 
 	cdata := C.malloc(C.size_t(len(buf)))
-	copy((*[1<<24]byte)(cdata)[0:len(buf)], buf)
+	copy((*[1 << 24]byte)(cdata)[0:len(buf)], buf)
 
 	return cdata, C.size_t(len(buf))
+}
+
+//export freeChar
+func freeChar(c *C.char) {
+	C.free(unsafe.Pointer(c))
 }
 
 func renderPdf(template string) ([]byte, error) {

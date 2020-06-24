@@ -7,3 +7,5 @@ lua:
 
 run:
 	docker run --name=lua ebcom/luago && docker cp lua:/app/invoice.pdf . && docker rm lua
+
+.PHONY: lua

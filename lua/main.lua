@@ -16,6 +16,7 @@ struct render_return {
 };
 
 extern struct render_return render(GoString p0);
+extern void freeChar(char* p0);
 ]]);
 
 local typeString = ffi.metatype("GoString", {})
@@ -29,3 +30,5 @@ file = io.open("invoice.pdf", "w")
 io.output(file)
 io.write(content)
 io.close(file)
+
+pdf.freeChar(result.r0)
