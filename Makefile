@@ -3,8 +3,8 @@
 all: build-shared-lib build-lua-image
 
 build-shared-lib:
-	go build -buildmode=c-shared -o lua/pdf.so pkg/pdf.go
-	go tool cgo -exportheader lua/pdf.h pkg/pdf.go
+	go build -buildmode=c-shared -o lua/pdf.so pdf.go
+	go tool cgo -exportheader lua/pdf.h pdf.go
 
 build-lua-image:
 	cd lua && docker build -t ebcom/luago .
